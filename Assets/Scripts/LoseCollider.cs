@@ -8,6 +8,7 @@ public class LoseCollider : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D trigger){
 		print ("Trigger");
 		SceneManager.LoadScene("Lose");
+		Brick.breakableCount = 0;
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){

@@ -6,6 +6,7 @@ public class Brick : MonoBehaviour {
 
 	public Sprite[] hitSprites;
 	public static int breakableCount = 0;
+	public AudioClip crack;
 
 
 	private int timesHit;
@@ -30,6 +31,7 @@ public class Brick : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
+		AudioSource.PlayClipAtPoint (crack, transform.position);
 		if (isBreakable) {
 			HandleHits ();
 		}
@@ -42,8 +44,10 @@ public class Brick : MonoBehaviour {
 
 	void LoadSprites(){
 		int spriteIndex = timesHit - 1;
-		if (hitSprites [spriteIndex]) {
+		if (hitSprites [spriteIndex] != null) {
 			this.GetComponent<SpriteRenderer> ().sprite = hitSprites [spriteIndex];	
+		} else {
+			Debug.LogError ("Falta un Brick sprite");
 		}
 	}
 
